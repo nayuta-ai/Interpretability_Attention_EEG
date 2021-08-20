@@ -1,9 +1,9 @@
-import os
 import numpy as np
 import math
 import scipy.io as sio
 from scipy.fftpack import fft,ifft
-
+datasetdir = "../../data_preprocessed_matlab"
+file_subject = ['s01', 's02', 's03', 's04', 's05', 's06', 's07', 's08', 's09', 's10', 's11','s12', 's13','s14','s15', 's16', 's17','s18', 's19', 's20','s21', 's22', 's23', 's24', 's25', 's26','s27', 's28', 's29', 's30', 's31', 's32']
 
 def DE_PSD(data,stft_para):
     '''
@@ -63,3 +63,9 @@ def DE_PSD(data,stft_para):
             #de(j,i,p)=log2((1+E)^4)
     
     return psd,de
+def feature_extract(data,param):
+    de=np.zeros([40*60,32,4])
+    for i in range(0,40*60):
+        _,de[i]=DE_PSD(data[i],param)
+    de=de.transpose(2,0,1)
+    return de
