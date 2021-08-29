@@ -17,7 +17,7 @@ def label_preprocess(emotion):
         else:
             emotion[i]=0
     return emotion
-
+# output:[2400,32,128]
 def DEAP_preprocess(dir,emotion):
     data =sio.loadmat(dir)
     datasets=data['data']
