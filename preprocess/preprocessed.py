@@ -1,5 +1,7 @@
 import numpy as np
 import scipy.io as sio
+import pandas as pd
+import torch
 
 def baseline_remove(datasets):
     data_in = datasets[0:40,0:32,0:8064]
@@ -17,7 +19,7 @@ def label_preprocess(emotion):
         else:
             emotion[i]=0
     return emotion
-
+# output:[2400,32,128]
 def DEAP_preprocess(dir,emotion):
     data =sio.loadmat(dir)
     datasets=data['data']
@@ -40,3 +42,12 @@ def DEAP_preprocess(dir,emotion):
     data_eeg = data_eeg.reshape(-1,32,128)
     label_eeg = label_eeg.astype(np.int64).reshape(-1)
     return data_eeg, label_eeg
+def adjacency_preprocess():
+    dataset = pd.read_table("preprocess/electrode.txt")
+    data1 = torch.tensor(dataset['dist'].values)
+    data2 = torch.tensor(dataset['arg'].values)
+    adj = torch.randn(32,32)
+    for i in range(len(data1)):
+        for j in range(len(data2)):
+            adj[i][j] = torch.where(abs(data1[i]-data1[j])<0.1 and abs(data2[i]-data2[j])<45,1,0)
+    return adj
