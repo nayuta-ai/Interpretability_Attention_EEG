@@ -1,8 +1,8 @@
 import numpy as np
 import scipy.io as sio
 from scipy.fftpack import fft,ifft
-from preprocess.preprocessed import DEAP_preprocess
-from preprocess.Feature_Extraction import feature_extract
+from preprocess.preprocessed import DEAP_preprocess,adjacency_preprocess
+from preprocess.feature import feature_extract
 
 dataset_dir = "../data_preprocessed_matlab/s01.mat"
 emotion = "valence"
