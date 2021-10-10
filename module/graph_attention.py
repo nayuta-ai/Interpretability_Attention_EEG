@@ -59,6 +59,6 @@ class GraphAttentionLayer(nn.Module):
         h_prime = torch.matmul(attention, Wh)
 
         if self.concat:
-            return F.elu(h_prime),e
+            return F.elu(h_prime),attention
         else:
-            return h_prime,e
+            return h_prime,attention
