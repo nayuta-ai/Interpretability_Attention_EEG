@@ -10,3 +10,4 @@ torchvision==0.8.1
 yacs==0.1.8
 mne
 matplotlib
+scikit-learn
